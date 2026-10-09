@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LastLink探偵事務所</title>
+    <!-- Google Fonts の読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&display=swap" rel="stylesheet">
+    
+    <style>
+    /* Google Fontsから上品な英文フォントをロード */
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Serif+JP:wght@300;400&display=swap');
+
+    /* --------------------------------------------------
+     * 1. オープニング演出（黒画面からフワッと白背景の本編へ）
+     * -------------------------------------------------- */
+    #splash {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #0d0d0f; /* オープニングだけは高級感のある黒 */
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: splashFadeOut 1s ease forwards;
+        animation-delay: 2.5s;
+        pointer-events: none;
+    }
+
+    .splash-logo {
+        text-align: center;
+        color: #ffffff;
+        animation: logoFadeIn 1.5s ease forwards;
+    }
+
+    /* ★追加：オープニング用ロゴ画像スタイル */
+    .splash-logo-img {
+        width: 100px;
+        height: auto;
+        margin-bottom: 15px;
+        border-radius: 12px; /* 少し角を丸めて上品に */
+    }
+
+    .splash-sub {
+        display: block;
+        font-family: 'Cinzel', serif;
+        font-size: 0.75rem;
+        letter-spacing: 6px;
+        color: #a3a3a8;
+        margin-bottom: 8px;
+    }
+
+    .splash-logo h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 2.8rem;
+        font-weight: 400;
+        letter-spacing: 12px;
+        margin: 0;
+    }
+
+    @keyframes logoFadeIn {
+        0% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes splashFadeOut {
+        0% { opacity: 1; }
+        100% { opacity: 0; visibility: hidden; }
+    }
+
+    /* --------------------------------------------------
+     * 2. 全体設定：上質な白（オフホワイト）ベース
+     * -------------------------------------------------- */
+    body {
+        font-family: 'Noto Serif JP', 'Times New Roman', serif;
+        margin: 0;
+        padding: 0;
+        color: #2c2c2e;             /* 濃いダークグレー（黒すぎず柔らかい文字色） */
+        background-color: #f9f9fb;   /* 高級感のある明るいオフホワイト */
+        line-height: 2;
+        letter-spacing: 0.08em;
+    }
+
+    /* --------------------------------------------------
+     * 3. ヘッダー：クリア＆ミニマル
+     * -------------------------------------------------- */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 50px;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid #e5e5ea;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    /* ★調整：ロゴ画像をヘッダーに配置するスタイル */
+    .logo a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .header-logo-img {
+        height: 40px;
+        width: auto;
+        border-radius: 6px;
+    }
+
+    .logo h2 {
+        font-family: 'Cinzel', serif;
+        font-weight: 400;
+        color: #1c1c1e;
+        letter-spacing: 3px;
+        margin: 0;
+        font-size: 1.3rem;
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 35px;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        margin-left: 30px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #636366;
+        font-size: 0.8rem;
+        font-family: 'Cinzel', serif;
+        letter-spacing: 3px;
+        transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+        color: #1c1c1e;
+    }
+
+    /* コンタクトボタン（黒のフレームボタン） */
+    .header-tel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        background-color: transparent;
+        color: #1c1c1e !important;
+        border: 1px solid #1c1c1e;
+        padding: 8px 24px;
+        transition: all 0.3s;
+    }
+
+    .header-tel:hover {
+        background-color: #1c1c1e;
+        color: #ffffff !important;
+    }
+
+    .header-tel .tel-label {
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+    }
+
+    .header-tel .tel-num {
+        font-size: 0.95rem;
+        font-family: 'Cinzel', serif;
+    }
+
+    /* --------------------------------------------------
+     * 4. メインビジュアル：重厚感のある作品写真エリア
+     * -------------------------------------------------- */
+    .main-visual {
+        position: relative;
+        height: 75vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        animation: fadeSlider 15s infinite;
+    }
+
+    .slide1 {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45)), url('https://picsum.photos/id/1060/1200/500');
+        animation-delay: 0s;
+    }
+
+    .slide2 {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45)), url('https://picsum.photos/id/1015/1200/500');
+        animation-delay: 5s;
+    }
+
+    .slide3 {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.45)), url('https://picsum.photos/id/1059/1200/500');
+        animation-delay: 10s;
+    }
+
+    @keyframes fadeSlider {
+        0% { opacity: 0; transform: scale(1); }
+        10% { opacity: 1; }
+        33% { opacity: 1; transform: scale(1.04); }
+        43% { opacity: 0; }
+        100% { opacity: 0; }
+    }
+
+    .main-visual-content {
+        position: relative;
+        z-index: 2;
+        padding: 20px;
+    }
+
+    .main-visual-content h1 {
+        font-size: 2.4rem;
+        font-weight: 300;
+        letter-spacing: 8px;
+        color: #ffffff;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .main-visual-content p {
+        font-size: 0.95rem;
+        color: #f2f2f7;
+        letter-spacing: 4px;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* --------------------------------------------------
+     * 5. メインコンテンツエリア
+     * -------------------------------------------------- */
+    main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 90px 20px;
+    }
+
+    section {
+        margin-bottom: 100px;
+    }
+
+    section h2 {
+        border-left: none;
+        padding-left: 0;
+        color: #1c1c1e;
+        font-size: 1.8rem;
+        font-weight: 300;
+        letter-spacing: 6px;
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    section h2[data-en]::before {
+        content: attr(data-en);
+        display: block;
+        font-size: 0.7rem;
+        color: #8e8e93;
+        letter-spacing: 4px;
+        margin-bottom: 8px;
+        font-family: 'Cinzel', serif;
+    }
+
+    /* --------------------------------------------------
+     * 6. 白背景に映えるクリーンなカードデザイン
+     * -------------------------------------------------- */
+    .services-grid, .reasons-grid {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    .service-card, .reason-card {
+        flex: 1;
+        min-width: 280px;
+        background: #ffffff;
+        border: 1px solid #e5e5ea;
+        border-radius: 0px;
+        overflow: hidden;
+        text-decoration: none;
+        color: #2c2c2e;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .reason-card {
+        padding: 35px 30px;
+        border-left: 2px solid #1c1c1e;
+    }
+
+    .service-card:hover, .reason-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        border-color: #d1d1d6;
+    }
+
+    .reason-num {
+        font-size: 1.8rem;
+        font-family: 'Cinzel', serif;
+        color: #1c1c1e;
+        margin-bottom: 12px;
+    }
+
+    .service-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+
+    .service-card:hover img {
+        transform: scale(1.03);
+    }
+
+    .service-card-body {
+        padding: 25px;
+    }
+
+    .service-card-body h3, .reason-card h3 {
+        margin: 0 0 12px 0;
+        color: #1c1c1e;
+        font-size: 1.15rem;
+        font-weight: 400;
+        letter-spacing: 2px;
+    }
+
+    .service-card-body p, .reason-card p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #636366;
+        line-height: 1.8;
+    }
+
+    /* --------------------------------------------------
+     * 7. フッター：シックな締めくくり
+     * -------------------------------------------------- */
+    footer {
+        text-align: center;
+        padding: 60px 20px;
+        background-color: #1c1c1e;
+        color: #8e8e93;
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+    }
+
+    .footer-tel a {
+        color: #ffffff;
+        text-decoration: none;
+        font-family: 'Cinzel', serif;
+        font-size: 1.3rem;
+        margin-left: 10px;
+    }
+</style>
+</head>
+<body>
+    <!-- オープニングアニメーション画面 -->
+    <div id="splash">
+        <div class="splash-logo">
+            <!-- ★追加：立ち上がり時のロゴ画像 -->
+            <img src="IMG_5825.jpeg" alt="LastLink Logo" class="splash-logo-img">
+            <span class="splash-sub">detective office</span>
+            <h1>LAST LINK</h1>
+        </div>
+    </div>
+
+    <!-- ヘッダーエリア -->
+    <header>
+        <div class="logo">
+            <!-- ★変更：ロゴ画像＋会社名（トップページへのリンク） -->
+            <a href="index.html">
+                <img src="IMG_5825.jpeg" alt="LastLink Logo" class="header-logo-img">
+                <h2>LastLink探偵事務所</h2>
+            </a>
+        </div>
+        <div class="header-right">
+            <nav>
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="index.html#services">事業内容</a></li>
+                    <li><a href="price.html">料金</a></li>
+                    <li><a href="company.html">会社概要</a></li>
+                    <li><a href="contact.html">お問い合わせ</a></li>
+                </ul>
+            </nav>
+            <a href="tel:070-3195-5965" class="header-tel">
+                <span class="tel-label">お電話でのご相談</span>
+                <span class="tel-num">📞 070-3195-5965</span>
+            </a>
+        </div>
+    </header>
+
+    <section class="main-visual">
+        <div class="slider">
+            <div class="slide slide1"></div>
+            <div class="slide slide2"></div>
+            <div class="slide slide3"></div>
+        </div>
+
+        <div class="main-visual-content">
+            <h1>真実を追求し</h1>
+            <p>未来のあなたを作る。</p>
+        </div>
+    </section>
+
+    <main>
+        <!-- 代表挨拶・理念セクション -->
+        <section class="about">
+            <h2 data-en="PHILOSOPHY & MESSAGE">代表挨拶・理念</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="philosophy-title">「真実を明らかにすることで、ご相談者様が前を向いて歩める未来をつくる」</p>
+                    <p>探偵事務所へご相談に来られる方の多くは、誰にも言えない深い悩みや不安を抱えていらっしゃいます。配偶者への疑念や将来への不安は、心身ともに大きなご負担となっているはずです。</p>
+                    <p>私たち「LastLink探偵事務所」は、単に事実を調べるだけの存在ではありません。確実な証拠を通じて「真実」を明らかにすることで、ご相談者様が抱える迷いを解消し、新たな一歩を踏み出すための力になることを使命としています。</p>
+                    <p>ご相談者様のお気持ちにどこまでも寄り添い、秘密厳守・丁寧な対応を徹底することをお約束いたします。お一人で悩まず、どうぞお気軽にご相談ください。</p>
+                    <p class="representative-name">LastLink探偵事務所 代表</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://picsum.photos/id/1060/600/400" alt="代表挨拶・相談室">
+                </div>
+            </div>
+        </section>
+
+        <!-- 「当事務所が選ばれる理由」 -->
+        <section class="reasons">
+            <h2 data-en="WHY CHOOSE US">当事務所が選ばれる理由</h2>
+            
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <div class="reason-num">01</div>
+                    <h3>明朗会計と徹底した事前お見積もり</h3>
+                    <p>追加料金なしの安心な料金体系。ご納得いただいていない費用が発生することは一切ありません。ご予算に合わせたプランもご提案します。</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-num">02</div>
+                    <h3>裁判でも使える「高品質な調査報告書」</h3>
+                    <p>言い逃れのできない鮮明な写真と詳細な行動記録を作成します。弁護士や裁判所からも高い信頼を得ている証拠力です。</p>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-num">03</div>
+                    <h3>親身に寄り添う「アフターフォロー」</h3>
+                    <p>証拠を取って終わりではなく、今後のやり直しや法的手続きまで親身にサポート。必要に応じて提携弁護士の無料紹介も行います。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 事業内容（サービス一覧） -->
+        <section id="services" class="services">
+            <h2 data-en="WORKS & SERVICES">事業内容</h2>
+            <p>当社の主な調査サービスをご紹介します。</p>
+            
+            <div class="services-grid">
+                <!-- 1. 浮気・不倫調査 -->
+                <a href="ubaki.html" class="service-card">
+                    <img src="https://picsum.photos/id/1012/600/400" alt="浮気・不倫調査">
+                    <div class="service-card-body">
+                        <h3>浮気・不倫調査 <span>&rarr;</span></h3>
+                        <p>パートナーの行動に疑問を感じた際、確実な証拠を収集いたします。</p>
+                    </div>
+                </a>
+
+                <!-- 2. 素行・身元調査 -->
+                <a href="sokou.html" class="service-card">
+                    <img src="https://picsum.photos/id/1059/600/400" alt="素行・身元調査">
+                    <div class="service-card-body">
+                        <h3>素行・身元調査 <span>&rarr;</span></h3>
+                        <p>対象者の日頃の立ち回りや交友関係、経歴などを正確に調査いたします。</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-tel">
+            <span>お電話でのお問い合わせ:</span>
+            <a href="tel:070-3195-5965">070-3195-5965</a>
+        </div>
+        <p>&copy; 2026 daisuke.kayanuma. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

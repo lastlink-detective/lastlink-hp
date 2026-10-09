@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会社概要 | LastLink探偵事務所</title>
+    <!-- Google Fonts の読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+    /* 全体設定 */
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        font-family: 'Noto Serif JP', 'Times New Roman', serif;
+        margin: 0;
+        padding: 0;
+        color: #2c2c2e;
+        background-color: #f9f9fb;
+        line-height: 2;
+        letter-spacing: 0.08em;
+    }
+
+    /* ヘッダー */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 50px;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid #e5e5ea;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .logo a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .header-logo-img {
+        height: 40px;
+        width: auto;
+        border-radius: 6px;
+    }
+
+    .logo h2 {
+        font-family: 'Cinzel', serif;
+        font-weight: 400;
+        color: #1c1c1e;
+        letter-spacing: 3px;
+        margin: 0;
+        font-size: 1.3rem;
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 35px;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        margin-left: 30px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #636366;
+        font-size: 0.8rem;
+        font-family: 'Cinzel', serif;
+        letter-spacing: 3px;
+        transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+        color: #1c1c1e;
+    }
+
+    .header-tel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        background-color: transparent;
+        color: #1c1c1e !important;
+        border: 1px solid #1c1c1e;
+        padding: 8px 24px;
+        transition: all 0.3s;
+    }
+
+    .header-tel:hover {
+        background-color: #1c1c1e;
+        color: #ffffff !important;
+    }
+
+    .header-tel .tel-label {
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+    }
+
+    .header-tel .tel-num {
+        font-size: 0.95rem;
+        font-family: 'Cinzel', serif;
+    }
+
+    /* ページヘッダー */
+    .page-header {
+        background-color: #1c1c1e;
+        color: #ffffff;
+        text-align: center;
+        padding: 70px 20px;
+    }
+    .page-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 2.2rem;
+        font-weight: 300;
+        letter-spacing: 6px;
+    }
+    .page-header p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #a3a3a8;
+        letter-spacing: 2px;
+    }
+
+    /* メインコンテンツ */
+    main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 80px 20px;
+    }
+
+    section {
+        margin-bottom: 80px;
+        background: #ffffff;
+        padding: 40px;
+        border: 1px solid #e5e5ea;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    section h2 {
+        color: #1c1c1e;
+        margin-top: 0;
+        margin-bottom: 30px;
+        font-size: 1.5rem;
+        font-weight: 400;
+        letter-spacing: 4px;
+        border-bottom: 1px solid #1c1c1e;
+        padding-bottom: 10px;
+    }
+
+    /* 会社概要テーブル */
+    .company-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    .company-table th, .company-table td {
+        border-bottom: 1px solid #e5e5ea;
+        padding: 20px 15px;
+        text-align: left;
+        font-size: 0.9rem;
+    }
+    .company-table th {
+        background-color: #f9f9fb;
+        color: #1c1c1e;
+        width: 25%;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    /* アクセスマップ枠 */
+    .map-container {
+        margin-top: 20px;
+        width: 100%;
+        height: 350px;
+        background-color: #f2f2f7;
+        border: 1px solid #e5e5ea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #8e8e93;
+        font-size: 0.85rem;
+    }
+
+    /* フッター */
+    footer {
+        text-align: center;
+        padding: 60px 20px;
+        background-color: #1c1c1e;
+        color: #8e8e93;
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+    }
+
+    .footer-tel a {
+        color: #ffffff;
+        text-decoration: none;
+        font-family: 'Cinzel', serif;
+        font-size: 1.3rem;
+        margin-left: 10px;
+    }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="IMG_5825.jpeg" alt="LastLink Logo" class="header-logo-img">
+                <h2>LastLink探偵事務所</h2>
+            </a>
+        </div>
+        <div class="header-right">
+            <nav>
+                <ul>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="index.html#services">事業内容</a></li>
+                    <li><a href="price.html">料金</a></li>
+                    <li><a href="company.html">会社概要</a></li>
+                    <li><a href="#">お問い合わせ</a></li>
+                </ul>
+            </nav>
+            <a href="tel:070-3195-5965" class="header-tel">
+                <span class="tel-label">お電話でのご相談</span>
+                <span class="tel-num">📞 070-3195-5965</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <h1>会社概要</h1>
+        <p>COMPANY PROFILE</p>
+    </div>
+
+    <main>
+        <!-- 事務所基本情報 -->
+        <section>
+            <h2>事務所概要</h2>
+            <table class="company-table">
+                <tr>
+                    <th>事務所名</th>
+                    <td>LastLink探偵事務所</td>
+                </tr>
+                <tr>
+                    <th>探偵業届出番号</th>
+                    <td>山梨県公安委員会 第47260006号<br><small style="color: #8e8e93;"></small></td>
+                </tr>
+                <tr>
+                    <th>所在地</th>
+                    <td>〒403-0005 山梨県富士吉田市上吉田２丁目５−１Qsta 3F<br><small style="color: #8e8e93;"></small></td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td>070-3195-5965</td>
+                </tr>
+                <tr>
+                    <th>事業内容</th>
+                    <td>
+                        ・浮気・不倫調査<br>
+                        ・素行・身元調査<br>
+                        ・行方調査・人探し<br>
+                    </td>
+                </tr>
+               
+            </table>
+        </section>
+
+        <!-- アクセスマップ -->
+        <section>
+            <h2>アクセス・所在地</h2>
+            <p style="font-size: 0.9rem; color: #636366;">ご面談は完全予約制となっております。プライバシー保護のため、ご来所の際は事前にお電話またはフォームよりご予約をお願いいたします。</p>
+            
+            <div class="map-container">
+                <p>【ここにGoogleマップの埋め込みコードを配置します】</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-tel">
+            <span>お電話でのお問い合わせ:</span>
+            <a href="tel:070-3195-5965">070-3195-5965</a>
+        </div>
+        <p>&copy; 2026 daisuke.kayanuma. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
